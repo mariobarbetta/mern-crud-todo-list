@@ -16,7 +16,7 @@ html {
   height: 100%;
 
   color: whitesmoke;
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(56, 56, 56);
 }
 
 h1 {
@@ -33,6 +33,11 @@ h2 {
   font-size: 1.5rem;
 
   color: rgba(218, 41, 28, 0.561);
+}
+
+table {
+  margin: auto;
+  width: 100%;
 }
 
 li {
@@ -58,4 +63,32 @@ li {
   border-radius: 4px;
   background-color: rgb(97, 190, 230);
   box-shadow: 4px 4px 8px #000;
+}
+
+.list-container {
+  width: 90%;
+  min-height: 200px;
+  margin: auto;
+  padding: 15px;
+
+  color: rgba(218, 41, 28, 0.822);
+  border-radius: 4px;
+  background-color: rgb(97, 190, 230);
+  box-shadow: 4px 4px 8px #000;
+}
+
+.text-cell {
+  width: 70%;
+}
+
+/* Media Queries */
+
+@media only screen and (min-width: 600px) {
+  .list-container {
+    width: 35%;
+  }
+
+  .todo-form-container {
+    width: 35%;
+  }
 }
