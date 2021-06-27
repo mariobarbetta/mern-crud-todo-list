@@ -22,6 +22,16 @@ const TodoList = () => {
       },
     ]);
   }, []);
+
+  const handleCheck = async (todo, index) => {
+    const newTodoItems = [...todoItems];
+    newTodoItems[index].isComplete = !newTodoItems[index].isComplete;
+    setTodoItems(newTodoItems);
+    // const id = todo._id;
+    // const newTodo = newTodoItems[index];
+    // await updateTodo(newTodo, id);
+  };
+
   return (
     <div>
       <h1>Todo List</h1>
@@ -35,10 +45,14 @@ const TodoList = () => {
                     className="checkbox"
                     type="checkbox"
                     checked={todo.isComplete}
-                    // onChange={() => handleCheck(todo, index)}
+                    onChange={() => handleCheck(todo, index)}
                   />
                 </td>
-                <td className="text-cell">{todo.text}</td>
+                <td className="text-cell">
+                  <span className={todo.isComplete ? "strike" : ""}>
+                    {todo.text}
+                  </span>
+                </td>
                 <td>
                   <Link className="pencil" to={`/edit/${todo._id}`}>
                     {pencil}
