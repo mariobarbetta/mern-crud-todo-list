@@ -32,6 +32,8 @@ h1 {
 h2 {
   font-size: 1.5rem;
 
+  text-align: center;
+
   color: rgba(218, 41, 28, 0.561);
 }
 
@@ -40,34 +42,34 @@ table {
   width: 100%;
 }
 
+nav {
+  text-align: center;
+}
+
+ul {
+  margin: 15px 0;
+  padding: 0;
+}
+
 li {
   list-style: none;
   font-size: 0.75rem;
 }
 
+a {
+  color: rgba(218, 41, 28, 0.89);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(75, 149, 94);
+}
+
 /* Modules */
-.todo-form-container {
+
+.container {
   width: 90%;
-  margin: auto;
-  margin-top: 50px;
-
-  text-align: center;
-}
-
-.todo-form {
-  font-weight: bold;
-
-  padding: 15px;
-
-  color: black;
-  border-radius: 4px;
-  background-color: rgb(97, 190, 230);
-  box-shadow: 4px 4px 8px #000;
-}
-
-.list-container {
-  width: 90%;
-  min-height: 200px;
+  /* min-height: 200px; */
   margin: auto;
   padding: 15px;
 
@@ -75,6 +77,37 @@ li {
   border-radius: 4px;
   background-color: rgb(97, 190, 230);
   box-shadow: 4px 4px 8px #000;
+}
+
+.form-container {
+  font-weight: bold;
+
+  width: 60%;
+  margin: auto;
+  margin-top: 15px;
+}
+
+input[type="text"] {
+  display: inline;
+
+  width: 80%;
+  padding: 0;
+
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: rgb(97, 190, 230);
+}
+
+input:focus {
+  outline: none;
+  background-color: rgb(97, 190, 230);
+}
+
+.plus-add-btn {
+  margin-right: 15px;
+  /* padding-left: 5px; */
+  cursor: pointer;
+  color: black;
 }
 
 .text-cell {
@@ -126,11 +159,11 @@ li {
 /* Media Queries */
 
 @media only screen and (min-width: 600px) {
-  .list-container {
+  .container {
     width: 35%;
   }
 
-  .todo-form-container {
+  /* .edit-todo-container {
     width: 35%;
-  }
+  } */
 }

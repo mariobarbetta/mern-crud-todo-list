@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import TodoForm from "./TodoForm";
 
 const EditTodo = () => {
-  return (
-    <div className="todo-form-container">
-      <div>
-        <h2>Edit Todo Item</h2>
+  const [todo, setTodo] = useState();
+
+  useEffect(() => {
+    setTodo({
+      text: "foo",
+    });
+  }, []);
+
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data));
+  };
+
+  return todo ? (
+    <div>
+      <h2>Edit Todo Item</h2>
+      <div className="container">
+        <div>
+          <TodoForm todo={todo} onSubmit={onSubmit} />
+        </div>
       </div>
       <nav>
         <ul>
@@ -15,6 +31,8 @@ const EditTodo = () => {
         </ul>
       </nav>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
