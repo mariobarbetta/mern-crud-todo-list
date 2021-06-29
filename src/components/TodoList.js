@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import TodoForm from "./TodoForm";
 
 const TodoList = () => {
   const [todoItems, setTodoItems] = useState([{ text: "", isComplete: false }]);
@@ -32,10 +33,14 @@ const TodoList = () => {
     // await updateTodo(newTodo, id);
   };
 
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data));
+  };
+
   return (
     <div>
       <h1>Todo List</h1>
-      <div className="list-container">
+      <div className="container">
         <table>
           <tbody>
             {todoItems.map((todo, index) => (
@@ -70,6 +75,9 @@ const TodoList = () => {
             ))}
           </tbody>
         </table>
+        <div>
+          <TodoForm onSubmit={onSubmit} />
+        </div>
       </div>
     </div>
   );
