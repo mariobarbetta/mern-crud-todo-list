@@ -1,17 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 
 const TodoForm = ({ todo, onSubmit }) => {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     defaultValues: { text: todo ? todo.text : "" },
   });
 
-  const history = useHistory();
-
   const submitHandler = handleSubmit((data) => {
     onSubmit(data);
-    history.push("/");
+    reset();
   });
 
   return (
@@ -22,7 +19,7 @@ const TodoForm = ({ todo, onSubmit }) => {
         </span>
 
         <input
-          {...register}
+          {...register("text")}
           type="text"
           name="text"
           id="text"

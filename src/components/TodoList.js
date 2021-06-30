@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { deleteTodo, getTodos, updateTodo, createTodo } from "../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import TodoForm from "./TodoForm";
@@ -10,31 +11,38 @@ const TodoList = () => {
   const deleteButton = <FontAwesomeIcon icon={faMinusCircle} />;
 
   useEffect(() => {
-    setTodoItems([
-      {
-        text: "Item 1",
-        isComplete: false,
-        id: 0,
-      },
-      {
-        text: "Item 2",
-        isComplete: false,
-        id: 1,
-      },
-    ]);
+    const fetchItems = async () => {
+      const todos = await getTodos();
+      setTodoItems(todos);
+    };
+    fetchItems();
   }, []);
+
+  const handleDelete = async (todo) => {
+    await deleteTodo(todo);
+    const todos = await getTodos();
+    setTodoItems(todos);
+  };
 
   const handleCheck = async (todo, index) => {
     const newTodoItems = [...todoItems];
     newTodoItems[index].isComplete = !newTodoItems[index].isComplete;
     setTodoItems(newTodoItems);
-    // const id = todo._id;
-    // const newTodo = newTodoItems[index];
-    // await updateTodo(newTodo, id);
+    const id = todo._id;
+    const newTodo = newTodoItems[index];
+    await updateTodo(newTodo, id);
   };
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+  const onSubmit = async (data) => {
+    if (data.text) {
+      const newTodo = { ...data, isComplete: false };
+      await createTodo(newTodo);
+      const fetchItems = async () => {
+        const todos = await getTodos();
+        setTodoItems(todos);
+      };
+      fetchItems();
+    }
   };
 
   return (
@@ -44,7 +52,7 @@ const TodoList = () => {
         <table>
           <tbody>
             {todoItems.map((todo, index) => (
-              <tr key={todo.id} index={index}>
+              <tr key={todo._id} index={index}>
                 <td>
                   <input
                     className="checkbox"
@@ -66,7 +74,7 @@ const TodoList = () => {
                 <td>
                   <span
                     className="delete-button"
-                    // onClick={() => handleDelete(todo)}
+                    onClick={() => handleDelete(todo)}
                   >
                     {deleteButton}
                   </span>

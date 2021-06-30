@@ -110,13 +110,23 @@ input:focus {
   color: black;
 }
 
+.plus-add-btn:hover {
+  color: rgba(218, 41, 28, 0.89);
+}
+
 .text-cell {
+  overflow: hidden;
+
   width: 70%;
+  max-width: 230px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .pencil {
   font-size: 0.7rem;
-  margin-right: 5px;
+  margin: 0 5px 0 8px;
   color: rgba(218, 41, 28, 0.89);
 }
 
