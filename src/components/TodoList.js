@@ -4,9 +4,13 @@ import { deleteTodo, getTodos, updateTodo, createTodo } from "../api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import TodoForm from "./TodoForm";
+import { showAddTodo } from "../panel-slide";
 
 const TodoList = () => {
-  const [todoItems, setTodoItems] = useState([{ text: "", isComplete: false }]);
+  const [todoItems, setTodoItems] = useState([
+    { text: "", isComplete: false, hideTools: true },
+  ]);
+
   const pencil = <FontAwesomeIcon icon={faPencilAlt} />;
   const deleteButton = <FontAwesomeIcon icon={faMinusCircle} />;
 
@@ -14,6 +18,8 @@ const TodoList = () => {
     const fetchItems = async () => {
       const todos = await getTodos();
       setTodoItems(todos);
+      console.log(todos);
+      console.log(todos[0].hideTools);
     };
     fetchItems();
   }, []);
@@ -33,9 +39,25 @@ const TodoList = () => {
     await updateTodo(newTodo, id);
   };
 
+  const showOptions = (index) => {
+    const newTodoItems = [...todoItems];
+    newTodoItems[index].hideTools = false;
+    setTodoItems(newTodoItems);
+  };
+
+  const hideOptions = (index) => {
+    const newTodoItems = [...todoItems];
+    newTodoItems[index].hideTools = true;
+    setTodoItems(newTodoItems);
+  };
+
+  const handleAddPanelSlide = () => {
+    showAddTodo();
+  };
+
   const onSubmit = async (data) => {
     if (data.text) {
-      const newTodo = { ...data, isComplete: false };
+      const newTodo = { ...data, isComplete: false, hideTools: true };
       await createTodo(newTodo);
       const fetchItems = async () => {
         const todos = await getTodos();
@@ -47,15 +69,27 @@ const TodoList = () => {
 
   return (
     <div>
-      <h1>Todo List</h1>
       <div className="container">
-        <table>
-          <tbody>
+        <div className="circle">
+          <h1>Todo</h1>
+        </div>
+        <div className="the-word-list">List</div>
+        <table id="table">
+          <tbody id="tBody">
             {todoItems.map((todo, index) => (
-              <tr key={todo._id} index={index}>
+              <tr
+                key={todo._id}
+                index={index}
+                onMouseEnter={() => showOptions(index)}
+                onMouseLeave={() => hideOptions(index)}
+              >
                 <td>
                   <input
-                    className="checkbox"
+                    className={
+                      todo.hideTools || todo.hideTools === undefined
+                        ? "checkbox hide"
+                        : ""
+                    }
                     type="checkbox"
                     checked={todo.isComplete}
                     onChange={() => handleCheck(todo, index)}
@@ -67,13 +101,24 @@ const TodoList = () => {
                   </span>
                 </td>
                 <td>
-                  <Link className="pencil" to={`/edit/${todo._id}`}>
+                  <Link
+                    className={
+                      todo.hideTools || todo.hideTools === undefined
+                        ? "pencil hide"
+                        : "pencil"
+                    }
+                    to={`/edit/${todo._id}`}
+                  >
                     {pencil}
                   </Link>
                 </td>
                 <td>
                   <span
-                    className="delete-button"
+                    className={
+                      todo.hideTools || todo.hideTools === undefined
+                        ? "delete-button hide"
+                        : "delete-button"
+                    }
                     onClick={() => handleDelete(todo)}
                   >
                     {deleteButton}
@@ -83,7 +128,11 @@ const TodoList = () => {
             ))}
           </tbody>
         </table>
-        <div>
+        <div className="plus-add-btn">
+          <span onClick={() => handleAddPanelSlide()}>+</span>
+        </div>
+        <div className="add-todo-container">
+          <h2>Add a todo</h2>
           <TodoForm onSubmit={onSubmit} />
         </div>
       </div>

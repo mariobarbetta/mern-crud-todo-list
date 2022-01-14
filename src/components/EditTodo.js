@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { getTodo, updateTodo } from "../api";
 import TodoForm from "./TodoForm";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const EditTodo = () => {
   const match = useRouteMatch();
@@ -24,20 +24,20 @@ const EditTodo = () => {
   };
 
   return todo ? (
-    <div>
-      <h2>Edit Todo Item</h2>
-      <div className="container">
+    <div className="container">
+      <div className="edit-todo-container">
+        <h2>Edit Todo Item</h2>
         <div>
           <TodoForm todo={todo} onSubmit={onSubmit} />
         </div>
       </div>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">Todo List</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </div>
   ) : (
     <div>Loading...</div>
