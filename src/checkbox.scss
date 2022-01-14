@@ -2,6 +2,7 @@ $black: #363839;
 $red: rgba(218, 41, 28, 0.822);
 $white: #fff;
 $green: rgb(75, 149, 94);
+$grey: rgb(93, 92, 92);
 
 * {
   box-sizing: border-box;
@@ -13,11 +14,11 @@ $green: rgb(75, 149, 94);
 
 input[type="checkbox"] {
   position: relative;
-  top: 2px;
+  top: 4px;
   width: 1.2em;
   height: 1.2em;
   color: $black;
-  border: 1px solid $red;
+  border: 1px solid $black;
   border-radius: 4px;
   appearance: none;
   outline: 0;
@@ -39,8 +40,8 @@ input[type="checkbox"] {
   }
   &:checked {
     color: $white;
-    border-color: $green;
-    background: $green;
+    border-color: $grey;
+    background: $grey;
     &::before {
       opacity: 1;
     }

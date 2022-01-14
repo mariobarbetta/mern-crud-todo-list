@@ -15,8 +15,8 @@ html {
   width: 100%;
   height: 100%;
 
-  color: whitesmoke;
-  background-color: rgb(56, 56, 56);
+  color: black;
+  background-color: black;
 }
 
 h1 {
@@ -24,22 +24,28 @@ h1 {
   font-size: 2.5rem;
   font-weight: 900;
 
-  text-align: center;
+  position: absolute;
 
-  color: rgba(218, 41, 28, 0.472);
-}
+  margin-top: 140px;
+  margin-left: 2em;
 
-h2 {
-  font-size: 1.5rem;
-
-  text-align: center;
-
-  color: rgba(218, 41, 28, 0.561);
+  color: whitesmoke;
 }
 
 table {
-  margin: auto;
   width: 100%;
+  margin: auto;
+  margin-top: -120px;
+}
+
+tbody {
+  display: block;
+  overflow: auto;
+  height: 300px;
+}
+
+tr {
+  height: 28px;
 }
 
 nav {
@@ -52,72 +58,156 @@ ul {
 }
 
 li {
-  list-style: none;
   font-size: 0.75rem;
+
+  list-style: none;
 }
 
 a {
-  color: rgba(218, 41, 28, 0.89);
   text-decoration: none;
 }
 
-a:hover {
-  color: rgb(75, 149, 94);
+a:hover,
+.delete-button:hover {
+  color: rgb(165, 165, 165);
 }
 
 /* Modules */
 
 .container {
-  width: 90%;
-  /* min-height: 200px; */
+  overflow: hidden;
+
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
   margin: auto;
   padding: 15px;
 
-  color: rgba(218, 41, 28, 0.822);
-  border-radius: 4px;
-  background-color: rgb(97, 190, 230);
-  box-shadow: 4px 4px 8px #000;
+  color: black;
+  background-color: whitesmoke;
+}
+
+.circle {
+  position: relative;
+  right: 4rem;
+  bottom: 8rem;
+
+  width: 15rem;
+  height: 15rem;
+
+  border-radius: 50%;
+  background-image: radial-gradient(rgb(66, 66, 66) 5%, rgb(29, 29, 29) 95%);
+  box-shadow: 4px 4px 8px #555;
+}
+
+.the-word-list {
+  position: relative;
+  bottom: 170px;
+  left: 150px;
+  font-size: 2.5rem;
+  color: grey;
+}
+
+.plus-add-btn {
+  width: 50px;
+  height: 50px;
+  margin: 25px 0 0 79%;
+
+  cursor: pointer;
+
+  color: whitesmoke;
+  border-radius: 50%;
+  background-color: black;
+  box-shadow: 4px 4px 8px #555;
+}
+
+.plus-add-btn:hover {
+  color: rgba(194, 28, 16, 0.89);
+}
+
+.plus-add-btn span {
+  font-size: 1.6rem;
+
+  position: relative;
+  top: 5px;
+  left: 16.5px;
+}
+
+.add-todo-container,
+.edit-todo-container {
+  top: 100vh;
+  left: 5%;
+
+  width: 90%;
+  margin: 0 auto;
+
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.add-todo-container {
+  transform: translate(0, 300px);
+}
+
+.edit-todo-container {
+  margin-top: 100px;
+}
+
+.add-todo-container__add-btn {
+  display: block;
+
+  margin: 4rem auto 2rem auto;
+  padding: 10px 10px 15px 10px;
+
+  text-align: center;
+
+  color: whitesmoke;
+  border-radius: 5px;
+  background-color: black;
+  cursor: pointer;
+}
+
+h2 {
+  margin: 2rem 0 0 2rem;
 }
 
 .form-container {
-  font-weight: bold;
-
   width: 60%;
   margin: auto;
   margin-top: 15px;
 }
 
 input[type="text"] {
+  font-size: 1rem;
+
   display: inline;
 
-  width: 80%;
+  width: 100%;
+  margin-top: 50px;
   padding: 0;
 
   border: none;
   border-bottom: 2px solid black;
-  background-color: rgb(97, 190, 230);
+  background-color: whitesmoke;
 }
 
 input:focus {
   outline: none;
-  background-color: rgb(97, 190, 230);
 }
 
-.plus-add-btn {
-  margin-right: 15px;
-  /* padding-left: 5px; */
-  cursor: pointer;
-  color: black;
+.checkbox {
+  width: 30px;
 }
 
-.plus-add-btn:hover {
-  color: rgba(218, 41, 28, 0.89);
+.hide {
+  visibility: hidden;
 }
 
 .text-cell {
   overflow: hidden;
 
-  width: 70%;
+  width: 75%;
   max-width: 230px;
 
   white-space: nowrap;
@@ -126,13 +216,16 @@ input:focus {
 
 .pencil {
   font-size: 0.7rem;
+
   margin: 0 5px 0 8px;
-  color: rgba(218, 41, 28, 0.89);
+
+  color: black;
 }
 
 .delete-button {
-  color: rgb(75, 149, 94);
   cursor: pointer;
+
+  color: black;
 }
 
 /* Text Strike-through */
@@ -149,7 +242,7 @@ input:focus {
 }
 .strike::after {
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 0;
 
   width: 100%;
@@ -161,7 +254,7 @@ input:focus {
   animation-timing-function: linear;
   animation-iteration-count: 1;
 
-  background: black;
+  background: rgb(153, 2, 2);
 
   animation-fill-mode: forwards;
 }
@@ -170,10 +263,12 @@ input:focus {
 
 @media only screen and (min-width: 600px) {
   .container {
-    width: 35%;
+    width: 24%;
+    height: 600px;
+    margin-top: 2%;
   }
 
-  /* .edit-todo-container {
-    width: 35%;
-  } */
+  .add-todo-container {
+    width: 100%;
+  }
 }
